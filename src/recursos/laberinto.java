@@ -5,7 +5,7 @@
  */
 package recursos;
 
-import Estructuras.Arbol;
+import Estructuras.ArbolRev;
 import Estructuras.Nodo;
 import java.util.Random;
 
@@ -17,7 +17,7 @@ public class laberinto {
 
     private int size;
     private Nodo[][] matriz;
-    private Arbol arbol;
+    private ArbolRev arbol;
 
     public int getSize() {
         return size;
@@ -35,11 +35,11 @@ public class laberinto {
         this.matriz = matriz;
     }
 
-    public Arbol getArbol() {
+    public ArbolRev getArbol() {
         return arbol;
     }
 
-    public void setArbol(Arbol arbol) {
+    public void setArbol(ArbolRev arbol) {
         this.arbol = arbol;
     }
 
@@ -51,7 +51,7 @@ public class laberinto {
                 matriz[i][j] = new Nodo();
             }
         }
-        this.arbol = new Arbol(matriz[0][0]);
+        this.arbol = new ArbolRev(matriz[0][0]);
     }
 
     public void generarLaberinto() {

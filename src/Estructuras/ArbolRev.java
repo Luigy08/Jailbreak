@@ -7,14 +7,14 @@ package Estructuras;
  *
  * @author Usuario
  */
-public class Arbol {
+public class ArbolRev {
     private Nodo raiz;
     private Nodo ultimaHoja;
-    public Arbol(){
+    public ArbolRev(){
         this.raiz=null;
         this.ultimaHoja=null;
     }
-    public Arbol(Nodo raiz) {
+    public ArbolRev(Nodo raiz) {
         this.raiz = raiz;
     }
     public Nodo getRaiz() {
