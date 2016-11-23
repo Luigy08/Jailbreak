@@ -82,33 +82,30 @@ public class laberinto {
             if (datos.getFila() == 0 && datos.getColumna() < size || datos.getFila() < size && datos.getColumna() == 0 || datos.getFila() == size - 1 && datos.getColumna() < size || datos.getFila() < size && datos.getColumna() == size - 1) {
                 if (entradaSalida < 2) {
                     actual.setValor("O");
-                    entradaSalida=2;
-                    actual.setVisitado(true);
+                    entradaSalida++;
                 }else if(entradaSalida==2){
-                    arbol.setUltimaHoja(matriz[datos.getFila()][datos.getColumna()]);
-                    matriz[datos.getFila()][datos.getColumna()].setValor("X");
                     actual.setValor("X");
+                    arbol.setUltimaHoja(matriz[datos.getFila()][datos.getColumna()]);
                     entradaSalida=3;
-                    actual.setVisitado(true);
-                }else if (entradaSalida ==3) {
-                    if (actual.isVisitado()) {
+                }
+                if (entradaSalida ==3) {
+                    if (actual.getValor().equals(" ")) {
                         actual.setValor("#");
-                        actual.setVisitado(true);
+                        
                     }
                 }
             } else {
-                int tem = rnd.nextInt(3);
+                int tem = rnd.nextInt(2);
 
-                if (entradaSalida == 3) {
+                if (entradaSalida == 3&&!actual.getValor().equals("#")&&!actual.getValor().equals("-")&&!actual.getValor().equals("A")) {
 
                     if (tem == 0) {
                         actual.setValor("#");
                     } else {
                         actual.setValor("-");
                     }
-                    actual.setVisitado(true);
-                } else {
-                    actual.setVisitado(true);
+                    
+                } else if(!actual.getValor().equals("#")&&!actual.getValor().equals("-")&&!actual.getValor().equals("A")){
                     actual.setValor("A");
                 }
 
@@ -212,7 +209,6 @@ public class laberinto {
                 if (matriz[datos.getFila() + 1][datos.getColumna()].isVisitado()) {
                     continue;
                 } else {
-                    //System.out.println("Enlazar hacia abajo con: "+(datos.getFila()+1)+","+datos.getColumna()+" Nodo:"+matNodos[datos.getFila()+1][datos.getColumna()]);
                     actual.setAbajo(matriz[datos.getFila() + 1][datos.getColumna()]);
                     Nodo anterior = actual;
                     actual = actual.getAbajo();
