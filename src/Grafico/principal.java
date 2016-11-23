@@ -56,6 +56,11 @@ public class principal extends javax.swing.JFrame {
         });
 
         Pane.setFont(new java.awt.Font("Tahoma", 0, 23)); // NOI18N
+        Pane.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PaneKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(Pane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,6 +181,43 @@ public class principal extends javax.swing.JFrame {
         CurrentPositionY = actual.getFila();
         Update(GuiMat);
     }//GEN-LAST:event_PlayButtonMouseClicked
+
+    private void PaneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PaneKeyPressed
+        System.out.println(CurrentPositionX);
+        System.out.println(CurrentPositionY);
+        
+        if (evt.getKeyCode() == 37) {//left
+            if (GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("□") || GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("A")) {
+                GuiMat[CurrentPositionX - 1][CurrentPositionY] = "O";
+                GuiMat[CurrentPositionX][CurrentPositionY] = "□";
+                CurrentPositionX = CurrentPositionX - 1;
+            }
+        }
+        
+        if (evt.getKeyCode() == 38) {// up
+         if (GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("□") || GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("A")) {
+                GuiMat[CurrentPositionX - 1][CurrentPositionY] = "O";
+                GuiMat[CurrentPositionX][CurrentPositionY] = "□";
+                CurrentPositionX = CurrentPositionX - 1;
+            }   
+        }
+        
+        if (evt.getKeyCode() == 39) {// right
+           if (GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("□") || GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("A")) {
+                GuiMat[CurrentPositionX - 1][CurrentPositionY] = "O";
+                GuiMat[CurrentPositionX][CurrentPositionY] = "□";
+                CurrentPositionX = CurrentPositionX - 1;
+            } 
+        }
+        
+        if (evt.getKeyCode() == 40) { // down
+            if (GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("□") || GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("A")) {
+                GuiMat[CurrentPositionX - 1][CurrentPositionY] = "O";
+                GuiMat[CurrentPositionX][CurrentPositionY] = "□";
+                CurrentPositionX = CurrentPositionX - 1;
+            }
+        }
+    }//GEN-LAST:event_PaneKeyPressed
 
     /**
      * @param args the command line arguments
