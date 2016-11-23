@@ -104,15 +104,27 @@ public class principal extends javax.swing.JFrame {
         }
         
         if (evt.getKeyCode() == 38) {// up
-            
+         if (GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("□") || GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("A")) {
+                GuiMat[CurrentPositionX - 1][CurrentPositionY] = "O";
+                GuiMat[CurrentPositionX][CurrentPositionY] = "□";
+                CurrentPositionX = CurrentPositionX - 1;
+            }   
         }
         
         if (evt.getKeyCode() == 39) {// right
-            
+           if (GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("□") || GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("A")) {
+                GuiMat[CurrentPositionX - 1][CurrentPositionY] = "O";
+                GuiMat[CurrentPositionX][CurrentPositionY] = "□";
+                CurrentPositionX = CurrentPositionX - 1;
+            } 
         }
         
         if (evt.getKeyCode() == 40) { // down
-            
+            if (GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("□") || GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("A")) {
+                GuiMat[CurrentPositionX - 1][CurrentPositionY] = "O";
+                GuiMat[CurrentPositionX][CurrentPositionY] = "□";
+                CurrentPositionX = CurrentPositionX - 1;
+            }
         }
         
     }//GEN-LAST:event_PlayButtonKeyPressed
