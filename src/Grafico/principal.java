@@ -5,8 +5,9 @@
  */
 package Grafico;
 
-import Estructuras.Arbol;
-import Estructuras.Nodo;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import recursos.NodoActual;
 import recursos.laberinto;
 
 /**
@@ -20,7 +21,6 @@ public class principal extends javax.swing.JFrame {
      */
     public principal() {
         initComponents();
-
     }
 
     /**
@@ -32,51 +32,138 @@ public class principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        PlayButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Pane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        PlayButton.setText("Jugar!");
+        PlayButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PlayButtonMouseClicked(evt);
             }
         });
+        PlayButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PlayButtonActionPerformed(evt);
+            }
+        });
+        PlayButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PlayButtonKeyPressed(evt);
+            }
+        });
+
+        Pane.setFont(new java.awt.Font("Tahoma", 0, 23)); // NOI18N
+        jScrollPane1.setViewportView(Pane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(PlayButton)
+                        .addGap(268, 268, 268))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(266, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(PlayButton)
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        laberinto lab=new laberinto();
-        Arbol arbol=new Arbol();
-        Nodo actual=arbol.getRaiz();
+    private void PlayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayButtonActionPerformed
+
+
+    }//GEN-LAST:event_PlayButtonActionPerformed
+
+    private void PlayButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PlayButtonKeyPressed
+
+        System.out.println(CurrentPositionX);
+        System.out.println(CurrentPositionY);
+        
+        if (evt.getKeyCode() == 37) {//left
+            if (GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("□") || GuiMat[CurrentPositionX - 1][CurrentPositionY].equals("A")) {
+                GuiMat[CurrentPositionX - 1][CurrentPositionY] = "O";
+                GuiMat[CurrentPositionX][CurrentPositionY] = "□";
+                CurrentPositionX = CurrentPositionX - 1;
+            }
+        }
+        
+        if (evt.getKeyCode() == 38) {// up
+            
+        }
+        
+        if (evt.getKeyCode() == 39) {// right
+            
+        }
+        
+        if (evt.getKeyCode() == 40) { // down
+            
+        }
+        
+    }//GEN-LAST:event_PlayButtonKeyPressed
+
+    private void PlayButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayButtonMouseClicked
+
+        PlayMat = new String[40][40];
+        GuiMat = new String[40][40];
+        lab = new laberinto();
         lab.generarLaberinto();
         for (int i = 0; i < lab.getSize(); i++) {
             for (int j = 0; j < lab.getSize(); j++) {
-               System.out.print("["+lab.getMatriz()[i][j].getValor()+"]");
+                PlayMat[i][j] = lab.getMatriz()[i][j].getValor();
+                System.out.print("[" + lab.getMatriz()[i][j].getValor() + "]");
             }
             System.out.println("");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-    
+        
+        for (int i = 0; i < PlayMat.length; i++) {
+            for (int j = 0; j < PlayMat.length; j++) {
+
+                if (PlayMat[i][j].equals("#")) {
+                    GuiMat[i][j] = "■";
+                }
+
+                if (PlayMat[i][j].equals("-")) {
+                    GuiMat[i][j] = "□";
+                }
+
+                if (PlayMat[i][j].equals("O")) {
+                    GuiMat[i][j] = "O";
+                }
+
+                if (PlayMat[i][j].equals("X")) {
+                    GuiMat[i][j] = "X";
+                }
+
+                if (PlayMat[i][j].equals("A")) {
+                    GuiMat[i][j] = "□";
+                }
+                if (PlayMat[i][j].equals(null)) {
+                    GuiMat[i][j] = "□";
+                }
+            }
+        }
+
+        actual = lab.Datos(lab.getArbol().getRaiz());
+        CurrentPositionX = actual.getColumna();
+        CurrentPositionY = actual.getFila();
+        Update(GuiMat);
+    }//GEN-LAST:event_PlayButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -113,8 +200,38 @@ public class principal extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    // End of variables declaration//GEN-END:variables
+    public void Update(String[][] Laberinth) {
+        Pane.setText("");
+        String text = "";
 
+        for (int i = 0; i < Laberinth.length; i++) {
+            for (int j = 0; j < Laberinth.length; j++) {
+                if (j == Laberinth.length - 1) {
+                    text = text + Laberinth[i][j] + "\n";
+                } else {
+                    text = text + Laberinth[i][j];
+                }
+            }
+        }
+        
+        Document doc = Pane.getDocument();
+        try {
+            doc.insertString(doc.getLength(), text, null);
+        } catch (BadLocationException e) {
+            throw new RuntimeException(e);
+        }
+        Pane.setCaretPosition(doc.getLength() - 1);
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane Pane;
+    private javax.swing.JButton PlayButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    // End of variables declaration//GEN-END:variables
+    laberinto lab;
+    String[][] PlayMat;
+    String[][] GuiMat;
+    NodoActual actual;
+    int CurrentPositionX;
+    int CurrentPositionY;
 }
